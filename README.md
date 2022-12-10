@@ -7,6 +7,8 @@ https://www.proway.com.br/curso/introducao-a-dart-e-flutter
 - Introdução a Dart e Flutter;
 - Exercícios de Dart;
 
+
+
 **Aula 2**
 - Introdução a Flutter;
 - Instalação do Flutter;
@@ -21,6 +23,8 @@ https://www.proway.com.br/curso/introducao-a-dart-e-flutter
 - TextField;
 - Image (introdução a Assets);
 - Exercícios 1, 2, 3, 4, e 5;
+
+
 
 **Aula 3**
 - Formulários;
