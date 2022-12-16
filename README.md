@@ -34,3 +34,12 @@ https://www.proway.com.br/curso/introducao-a-dart-e-flutter
 - Checkbox;
 - CheckBoxListTile;
 - Exercícios 6, 7 e 8;
+
+
+
+**Aula 4**
+- Snackbars;
+- FloatingActionButton;
+- Drawer;
+- ModalBottomSheet;
+- ModalBottomSheet;
