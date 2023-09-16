@@ -1,0 +1,35 @@
+//double calculadora({ double? valor1, double? valor2, required String operacao }) { // Parâmetros nomeados
+double calculadora(String operacao, [ double? valor1 = 1, double? valor2 = 1]) { // Parametros opcionasi
+  double resultado = 0;
+
+  switch (operacao) {
+    case "SOMA":
+      resultado = (valor1 ?? 0) + (valor2 ?? 0);
+      break;
+
+    case "SUBTRACAO":
+      resultado = (valor1 ?? 0) - (valor2 ?? 0);
+      break;
+
+    case "MULTIPLICACAO":
+      resultado = (valor1 ?? 0) * (valor2 ?? 0);
+      break;
+
+    case "DIVISAO":
+      if (valor2 == 0)
+        throw Exception("Divisão por zero");
+      
+      resultado = (valor1 ?? 0) / (valor2 ?? 0);
+      break;
+  }
+
+  return resultado;
+}
+
+void main() {
+  try {
+    print(calculadora("DIVISAO", 1, 0));
+  } finally {
+    print("Mas mesmo assim, passei por aqui");
+  }
+}
