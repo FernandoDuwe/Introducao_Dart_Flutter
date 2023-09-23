@@ -10,12 +10,9 @@ class ListViewDynamicExample extends StatefulWidget {
 class _ListViewDynamicExampleState extends State<ListViewDynamicExample> {
   TextEditingController itemController = TextEditingController();
 
-  List<String> itens = [
-    "Pizza",
-    "Água",
-    "Sabonete",
-    "Pasta de dente"
-  ];
+  List<String> itens = ["Pizza", "Água", "Sabonete", "Pasta de dente"];
+
+  String? _lastDeletedItem = null;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +21,9 @@ class _ListViewDynamicExampleState extends State<ListViewDynamicExample> {
         title: Text("Lista de compras"),
       ),
       body: ListView.builder(
-          itemCount: itens.length,
-          itemBuilder: (context, index) {
-            return ListTile(
+        itemCount: itens.length,
+        itemBuilder: (context, index) {
+          return ListTile(
               onTap: () {
                 print("Clicou no item ${itens[index]}");
               },
@@ -36,13 +33,27 @@ class _ListViewDynamicExampleState extends State<ListViewDynamicExample> {
               trailing: IconButton(
                 onPressed: () {
                   setState(() {
+                    _lastDeletedItem = itens[index];
+
                     itens.removeAt(index);
                   });
+
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("Item ${_lastDeletedItem!} excluído"),
+                      action: SnackBarAction(
+                        onPressed: () {
+                          setState(() {
+                            itens.add(_lastDeletedItem!);
+                          });
+                        },
+                        label: "Desfazer",                        
+                      ),
+                  ));
                 },
                 icon: Icon(Icons.delete, color: Colors.red),
-              )
-            );
-          },),
+              ));
+        },
+      ),
       bottomSheet: Container(
         color: Colors.grey,
         child: Row(
@@ -51,20 +62,20 @@ class _ListViewDynamicExampleState extends State<ListViewDynamicExample> {
               child: TextField(
                 controller: itemController,
                 decoration: InputDecoration(
-                  border: InputBorder.none,
-                  labelText: "Item"
-                ),
+                    border: InputBorder.none, labelText: "Item"),
               ),
             ),
-            IconButton(onPressed: () {
-              if (itemController.text.trim().isNotEmpty) {
-                setState(() {
-                  itens.add(itemController.text);
-                });
+            IconButton(
+                onPressed: () {
+                  if (itemController.text.trim().isNotEmpty) {
+                    setState(() {
+                      itens.add(itemController.text);
+                    });
 
-                itemController.text = "";
-              }
-            }, icon: Icon(Icons.add))
+                    itemController.text = "";
+                  }
+                },
+                icon: Icon(Icons.add))
           ],
         ),
       ),
